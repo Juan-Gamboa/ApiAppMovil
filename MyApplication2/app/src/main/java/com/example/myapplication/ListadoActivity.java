@@ -39,6 +39,7 @@ public class ListadoActivity extends AppCompatActivity {
             public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
                 InfoResponse infoResponse = response.body();
                 ArrayList<Usuario> contactosArrayList = new ArrayList<>();
+                contactosArrayList.add(new Usuario(2,"12345","test@","1","1","1","1"));
                 System.out.println("hola");
                 for (int x = 0; x < infoResponse.data.size(); x++) {
                     contactosArrayList.add(new Usuario(infoResponse.data.get(x).getId(),
