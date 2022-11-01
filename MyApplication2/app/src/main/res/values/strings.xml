@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="input_nombre">Nombre</string>
+    <string name="msg_toast">Hola Mundo!!!</string>
+    <string-array name="tipos_documentos">
+        <item>Cédula de ciudadania</item>
+        <item>Tarjeta de identidad</item>
+        <item>Cédula de extranjeria</item>
+        <item>Otro</item>
+    </string-array>
+</resources>
