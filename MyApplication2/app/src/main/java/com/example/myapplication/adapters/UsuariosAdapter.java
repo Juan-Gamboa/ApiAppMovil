@@ -14,25 +14,25 @@ import com.example.myapplication.models.Usuario;
 
 import java.util.List;
 
-public class ContactosAdapter extends RecyclerView.Adapter<ContactosAdapter.ViewHolder> {
+public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHolder> {
 
     private List<Usuario> usuarios;
     private LayoutInflater layoutInflater;
 
-    public ContactosAdapter(List<Usuario> contactos, Context context) {
+    public UsuariosAdapter(List<Usuario> contactos, Context context) {
         this.usuarios = contactos;
         this.layoutInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
-    public ContactosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UsuariosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = this.layoutInflater.inflate(R.layout.item_usuario_template, null);
-        return new ContactosAdapter.ViewHolder(view);
+        return new UsuariosAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContactosAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull UsuariosAdapter.ViewHolder viewHolder, int position) {
         Usuario usuario = this.usuarios.get(position);
         viewHolder.bindData(usuario);
 

@@ -5,9 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.example.myapplication.adapters.ContactosAdapter;
+import com.example.myapplication.adapters.UsuariosAdapter;
 import com.example.myapplication.models.Usuario;
 import com.example.myapplication.services.InfoServices;
 import com.example.myapplication.services.dataResponse.InfoResponse;
@@ -19,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ContactosActivity extends AppCompatActivity {
+public class ListadoActivity extends AppCompatActivity {
 
     public RecyclerView usuariosRecycleView;
     public List<Usuario> usuarios;
@@ -27,7 +26,7 @@ public class ContactosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contactos);
+        setContentView(R.layout.activity_listado);
 
         this.usuariosRecycleView = findViewById(R.id.usuariosRecycleView);
 
@@ -102,7 +101,7 @@ public class ContactosActivity extends AppCompatActivity {
     public void initData(){
         this.usuariosRecycleView.setHasFixedSize(true);
         this.usuariosRecycleView.setLayoutManager(new LinearLayoutManager(this));
-        ContactosAdapter adapter = new ContactosAdapter(this.usuarios, this);
+        UsuariosAdapter adapter = new UsuariosAdapter(this.usuarios, this);
         this.usuariosRecycleView.setAdapter(adapter);
     }
 }
