@@ -19,7 +19,7 @@ public interface InfoEndPoints {
     @GET("api/users/{id}")
     Call<InfoResponse> getInfoList();
 
-    @POST("/api/users")
+    @POST("api/users")
     @FormUrlEncoded
     Call<InfoResponse> postInfo();/*@Field("title") String title,
                         @Field("body") String body,

@@ -24,16 +24,19 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
     private List<Usuario> usuarios;
     private LayoutInflater layoutInflater;
 
+    private Context context;
+
     public UsuariosAdapter(List<Usuario> contactos, Context context) {
         this.usuarios = contactos;
         this.layoutInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @NonNull
     @Override
     public UsuariosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = this.layoutInflater.inflate(R.layout.item_usuario_template, null);
-        return new UsuariosAdapter.ViewHolder(view);
+        return new UsuariosAdapter.ViewHolder(view,this.context);
     }
 
     @Override
@@ -55,9 +58,11 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
         private ImageButton delBtn;
         private ImageButton modBtn;
         private ImageButton detailBtn;
+        private Context context;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView,Context context) {
             super(itemView);
+            this.context = context;
             this.namesLb = itemView.findViewById(R.id.namesLb);
             this.rolLB = itemView.findViewById(R.id.rolLB);
             this.delBtn = itemView.findViewById(R.id.delBtn);
@@ -73,15 +78,16 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
             this.modBtn.setId(usuario.getId());*/
             this.detailBtn.setOnClickListener(view -> {
                 System.out.println(usuario.getId());
-                Intent intent = new Intent(this, DetailActivity.class);
+                Intent intent = new Intent(this.context, DetailActivity.class);
                 Bundle infoU = new Bundle();
-                infoU.putInt("id",usuario.getId());
+                infoU.putString("id",String.valueOf(usuario.getId()));
                 infoU.putString("nombre",usuario.getNames());
-                infoU.putString("usuario",usuario.getNames());
-                infoU.putString("rol",usuario.getNames());
-                infoU.putString("creado",usuario.getNames());
-                infoU.putString("actualizado",usuario.getNames());
+                infoU.putString("usuario",usuario.getUsername());
+                infoU.putString("rol",usuario.getRol());
+                infoU.putString("creado",usuario.getCreated_at());
+                infoU.putString("actualizado",usuario.getUpdated_at());
                 intent.putExtras(infoU);
+                this.context.startActivity(intent);
             });
         }
 

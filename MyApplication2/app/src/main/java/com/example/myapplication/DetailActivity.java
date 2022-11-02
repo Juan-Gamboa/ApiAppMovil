@@ -27,7 +27,15 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         Bundle infoU = this.getIntent().getExtras();
-        this.idDetail.setText(infoU.getInt("id"));
+
+        this.idDetail = findViewById(R.id.idDetail);
+        this.namesDetail = findViewById(R.id.namesDetail);
+        this.userDetail = findViewById(R.id.userDetail);
+        this.rolDetail = findViewById(R.id.rolDetail);
+        this.creadoDetail = findViewById(R.id.creadoDetail);
+        this.actuaDetail = findViewById(R.id.actuaDetail);
+
+        this.idDetail.setText(infoU.getString("id"));
         this.namesDetail.setText(infoU.getString("nombre"));
         this.userDetail.setText(infoU.getString("usuario"));
         this.rolDetail.setText(infoU.getString("rol"));
