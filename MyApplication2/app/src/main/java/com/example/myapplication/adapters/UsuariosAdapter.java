@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.DetailActivity;
+import com.example.myapplication.PutActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Usuario;
 
@@ -76,6 +77,19 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
             this.rolLB.setText(usuario.getRol());
             /*this.delBtn.setId(usuario.getId());
             this.modBtn.setId(usuario.getId());*/
+            this.modBtn.setOnClickListener(view -> {
+                System.out.println(usuario.getId());
+                Intent intent = new Intent(this.context, PutActivity.class);
+                Bundle infoUs = new Bundle();
+                infoUs.putString("id",String.valueOf(usuario.getId()));
+                infoUs.putString("nombre",usuario.getNames());
+                infoUs.putString("usuario",usuario.getUsername());
+                infoUs.putString("rol",usuario.getRol());
+                infoUs.putString("creado",usuario.getCreated_at());
+                infoUs.putString("actualizado",usuario.getUpdated_at());
+                intent.putExtras(infoUs);
+                this.context.startActivity(intent);
+            });
             this.detailBtn.setOnClickListener(view -> {
                 System.out.println(usuario.getId());
                 Intent intent = new Intent(this.context, DetailActivity.class);

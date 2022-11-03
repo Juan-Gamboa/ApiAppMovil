@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.adapters.UsuariosAdapter;
 import com.example.myapplication.models.Usuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView rolDetail;
     private TextView creadoDetail;
     private TextView actuaDetail;
+    private Button regresarBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         this.rolDetail = findViewById(R.id.rolDetail);
         this.creadoDetail = findViewById(R.id.creadoDetail);
         this.actuaDetail = findViewById(R.id.actuaDetail);
+        this.regresarBtn = findViewById(R.id.regresarDetail);
 
         this.idDetail.setText(infoU.getString("id"));
         this.namesDetail.setText(infoU.getString("nombre"));
@@ -41,6 +44,16 @@ public class DetailActivity extends AppCompatActivity {
         this.rolDetail.setText(infoU.getString("rol"));
         this.creadoDetail.setText(infoU.getString("creado"));
         this.actuaDetail.setText(infoU.getString("actualizado"));
+
+        this.regresarBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ListadoActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+
+
+
 
 
 

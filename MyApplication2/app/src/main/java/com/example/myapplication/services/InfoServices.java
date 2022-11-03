@@ -26,7 +26,7 @@ public class InfoServices {
     }
 
     public Call<InfoResponse>putInfoServices(){
-        Call<InfoResponse> call = this.getRetroFit().create(InfoEndPoints.class).updatePost();
+        Call<InfoResponse> call = this.getRetroFit().create(InfoEndPoints.class).updatePost(1);
         return call;
     }
 

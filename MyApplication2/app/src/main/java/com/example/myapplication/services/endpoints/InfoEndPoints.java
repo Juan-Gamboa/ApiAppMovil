@@ -26,7 +26,7 @@ public interface InfoEndPoints {
                         @Field("userId") long userId);*/
     @PUT("api/users/{id}")
     @FormUrlEncoded
-    Call<InfoResponse> updatePost();/*@Path("id") long id,
+    Call<InfoResponse> updatePost(@Field("id") int id);/*@Path("id") long id,
                           @Field("title") String title,
                           @Field("body") String body,
                           @Field("userId") long userId);*/
