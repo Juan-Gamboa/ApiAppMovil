@@ -1,5 +1,6 @@
 package com.example.myapplication.services;
 
+import com.example.myapplication.models.Usuario;
 import com.example.myapplication.services.dataResponse.InfoResponse;
 import com.example.myapplication.services.endpoints.InfoEndPoints;
 
@@ -11,7 +12,7 @@ public class InfoServices {
 
     private Retrofit getRetroFit(){
         return new Retrofit.Builder()
-                .baseUrl("http://192.168.56.1:8080/")
+                .baseUrl("http://192.168.0.5:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -25,8 +26,12 @@ public class InfoServices {
         return call;
     }
 
-    public Call<InfoResponse>putInfoServices(){
-        Call<InfoResponse> call = this.getRetroFit().create(InfoEndPoints.class).updatePost(1);
+    public Call<InfoResponse>putInfoServices(String id, Usuario usuario){
+        Call<InfoResponse> call = this.getRetroFit().create(InfoEndPoints.class).updatePost(id,usuario);
+        return call;
+    }
+    public Call<InfoResponse> deleteInfoService(String id) {
+        Call<InfoResponse> call = this.getRetroFit().create(InfoEndPoints.class).deletePost(id);
         return call;
     }
 

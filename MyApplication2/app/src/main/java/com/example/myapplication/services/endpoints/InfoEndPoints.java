@@ -1,8 +1,10 @@
 package com.example.myapplication.services.endpoints;
 
+import com.example.myapplication.models.Usuario;
 import com.example.myapplication.services.dataResponse.InfoResponse;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Field;
@@ -26,12 +28,12 @@ public interface InfoEndPoints {
                         @Field("userId") long userId);*/
     @PUT("api/users/{id}")
     @FormUrlEncoded
-    Call<InfoResponse> updatePost(@Field("id") int id);/*@Path("id") long id,
+    Call<InfoResponse> updatePost(@Path("id") String id, @Body Usuario usuario);/*@Path("id") long id,
                           @Field("title") String title,
                           @Field("body") String body,
                           @Field("userId") long userId);*/
 
     @DELETE("api/users/{id}")
-    Call<InfoResponse> deletePost();/*@Path("id") long id);*/
+    Call<InfoResponse> deletePost(@Path("id") String id);/*@Path("id") long id);*/
 
 }

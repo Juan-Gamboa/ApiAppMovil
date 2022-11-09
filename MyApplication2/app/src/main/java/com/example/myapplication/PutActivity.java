@@ -18,6 +18,8 @@ import retrofit2.Response;
 
 public class PutActivity extends AppCompatActivity {
 
+    public Usuario usuario;
+
     private Button regresarBtn;
     private EditText idPut;
     private EditText namesPut;
@@ -25,6 +27,7 @@ public class PutActivity extends AppCompatActivity {
     private EditText rolPut;
     private EditText creadoPut;
     private EditText actuaPut;
+    private Button actualizarPut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +42,56 @@ public class PutActivity extends AppCompatActivity {
             finish();
         });
 
+
         Bundle infoU = this.getIntent().getExtras();
-        infoU.getInt("id");
+        ;
         this.idPut = findViewById(R.id.idPut);
         this.namesPut = findViewById(R.id.namesPut);
         this.userPut = findViewById(R.id.userPut);
         this.rolPut = findViewById(R.id.rolPut);
         this.creadoPut = findViewById(R.id.creadoPut);
         this.actuaPut = findViewById(R.id.actuaPut);
+        this.actualizarPut = findViewById(R.id.actualizarPut);
 
-        this.idPut.setText(infoU.getString("id"));
+        this.idPut.setText(String.valueOf(infoU.getInt("id")));
         this.namesPut.setText(infoU.getString("nombre"));
         this.userPut.setText(infoU.getString("usuario"));
         this.rolPut.setText(infoU.getString("rol"));
         this.creadoPut.setText(infoU.getString("creado"));
         this.actuaPut.setText(infoU.getString("actualizado"));
 
+        this.actualizarPut.setOnClickListener(view -> {
+            String id = String.valueOf(infoU.getInt("id"));
+            String nom = namesPut.getText().toString();
+            String unom = userPut.getText().toString();
+            String urol = rolPut.getText().toString();
 
-        Call<InfoResponse> respInfo = (new InfoServices()).putInfoServices();
+
+            Usuario usuario = new Usuario(Integer.parseInt(id),nom,unom,urol);
+
+            Call<InfoResponse> respInfo = (new InfoServices()).putInfoServices(String.valueOf(infoU.getInt("id")),usuario);
+            respInfo.enqueue(new Callback<InfoResponse>() {
+                @Override
+                public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
+                    InfoResponse infoResponse = response.body();
+                    System.out.println("hola");
+
+
+
+
+
+                }
+
+                @Override
+                public void onFailure(Call<InfoResponse> call, Throwable t) {
+                    System.out.println("ERROR: "+t.getMessage());
+                }
+            });
+        });
+
+
+
+       /* Call<InfoResponse> respInfo = (new InfoServices()).putInfoServices(infoU.getInt("id"),usuario);
         respInfo.enqueue(new Callback<InfoResponse>() {
             @Override
             public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
@@ -73,7 +108,7 @@ public class PutActivity extends AppCompatActivity {
             public void onFailure(Call<InfoResponse> call, Throwable t) {
                 System.out.println("ERROR: "+t.getMessage());
             }
-        });
+        });*/
 
 
     }

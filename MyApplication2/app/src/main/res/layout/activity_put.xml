@@ -7,11 +7,11 @@
     tools:context=".PutActivity">
 
     <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="405dp"
+        android:layout_width="414dp"
+        android:layout_height="516dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteX="-2dp"
         tools:layout_editor_absoluteY="139dp">
 
         <ImageView
@@ -37,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="false"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -121,6 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="false"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -142,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="false"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -150,6 +153,12 @@
             android:layout_width="237dp"
             android:layout_height="wrap_content"
             android:text="Volver" />
+
+        <Button
+            android:id="@+id/actualizarPut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actualizar" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

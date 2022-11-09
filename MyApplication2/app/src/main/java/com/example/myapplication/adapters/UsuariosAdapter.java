@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +20,8 @@ import com.example.myapplication.DetailActivity;
 import com.example.myapplication.PutActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Usuario;
+import com.example.myapplication.services.InfoServices;
+import com.example.myapplication.services.dataResponse.InfoResponse;
 
 import java.util.List;
 
@@ -75,13 +80,30 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
         public void bindData(final Usuario usuario){
             this.namesLb.setText(usuario.getNames());
             this.rolLB.setText(usuario.getRol());
-            /*this.delBtn.setId(usuario.getId());
-            this.modBtn.setId(usuario.getId());*/
+            this.delBtn.setOnClickListener(view -> {
+                Call<InfoResponse> respInfo = (new InfoServices().deleteInfoService(String.valueOf(usuario.getId())));
+                respInfo.enqueue(new Callback<InfoResponse>() {
+                    @Override
+                    public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
+
+                        /*Log.i("Info", "Conexión establecida");
+                        Log.i("Info", "Usuario eliminado");*/
+                    }
+
+                    @Override
+                    public void onFailure(Call<InfoResponse> call, Throwable t) {
+
+                        /*Log.i("Info", "Conexión denegada");
+                        Log.i("Info", t.getCause().getMessage());*/
+                    }
+                });
+            });
+            /*this.modBtn.setId(usuario.getId());*/
             this.modBtn.setOnClickListener(view -> {
                 System.out.println(usuario.getId());
                 Intent intent = new Intent(this.context, PutActivity.class);
                 Bundle infoUs = new Bundle();
-                infoUs.putString("id",String.valueOf(usuario.getId()));
+                infoUs.putInt("id",usuario.getId());
                 infoUs.putString("nombre",usuario.getNames());
                 infoUs.putString("usuario",usuario.getUsername());
                 infoUs.putString("rol",usuario.getRol());
