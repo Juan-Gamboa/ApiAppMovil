@@ -20,10 +20,19 @@ public class Usuario {
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
-    public Usuario(int id, String names, String username, String rol) {
+    public Usuario(int id, String names, String username, String password, String rol) {
         this.id = id;
         this.names = names;
         this.username = username;
+        this.password = password;
+        this.rol = rol;
+
+    }
+
+    public Usuario(String names, String username, String password, String rol) {
+        this.names = names;
+        this.username = username;
+        this.password = password;
         this.rol = rol;
     }
 

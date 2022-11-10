@@ -59,10 +59,4 @@ public class DetailActivity extends AppCompatActivity {
 
 
     }
-    public void initData(){
-        this.usuariosRecycleView.setHasFixedSize(true);
-        this.usuariosRecycleView.setLayoutManager(new LinearLayoutManager(this));
-        UsuariosAdapter adapter = new UsuariosAdapter(this.usuarios, this);
-        this.usuariosRecycleView.setAdapter(adapter);
-    }
 }

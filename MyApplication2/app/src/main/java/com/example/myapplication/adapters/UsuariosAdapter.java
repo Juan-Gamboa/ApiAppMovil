@@ -19,9 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.DetailActivity;
 import com.example.myapplication.PutActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.interfaces.ItemDelete;
 import com.example.myapplication.models.Usuario;
 import com.example.myapplication.services.InfoServices;
 import com.example.myapplication.services.dataResponse.InfoResponse;
+import com.example.myapplication.services.dataResponse.InfoResponseAll;
 
 import java.util.List;
 
@@ -31,11 +33,13 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
     private LayoutInflater layoutInflater;
 
     private Context context;
+    private ItemDelete itemDelete;
 
-    public UsuariosAdapter(List<Usuario> contactos, Context context) {
+    public UsuariosAdapter(List<Usuario> contactos, Context context,ItemDelete itemDelete) {
         this.usuarios = contactos;
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
+        this.itemDelete = itemDelete;
     }
 
     @NonNull
@@ -48,7 +52,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull UsuariosAdapter.ViewHolder viewHolder, int position) {
         Usuario usuario = this.usuarios.get(position);
-        viewHolder.bindData(usuario);
+        viewHolder.bindData(usuario,position);
 
     }
 
@@ -77,24 +81,25 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
 
         }
 
-        public void bindData(final Usuario usuario){
+        public void bindData(final Usuario usuario ,int position){
             this.namesLb.setText(usuario.getNames());
             this.rolLB.setText(usuario.getRol());
             this.delBtn.setOnClickListener(view -> {
-                Call<InfoResponse> respInfo = (new InfoServices().deleteInfoService(String.valueOf(usuario.getId())));
-                respInfo.enqueue(new Callback<InfoResponse>() {
+                Call<InfoResponseAll> respInfo = (new InfoServices().deleteInfoService(String.valueOf(usuario.getId())));
+                respInfo.enqueue(new Callback<InfoResponseAll>() {
                     @Override
-                    public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
+                    public void onResponse(Call<InfoResponseAll> call, Response<InfoResponseAll> response) {
 
-                        /*Log.i("Info", "Conexión establecida");
-                        Log.i("Info", "Usuario eliminado");*/
+                        System.out.println("Info"+ "Conexión establecida");
+                        System.out.println("Info"+ "Usuario eliminado");
+                        itemDelete.deleteItem(position);
                     }
 
                     @Override
-                    public void onFailure(Call<InfoResponse> call, Throwable t) {
+                    public void onFailure(Call<InfoResponseAll> call, Throwable t) {
 
-                        /*Log.i("Info", "Conexión denegada");
-                        Log.i("Info", t.getCause().getMessage());*/
+                        System.out.println("Info" +"Conexión denegada");
+                        System.out.println("Info" + t.getCause().getMessage());
                     }
                 });
             });
@@ -107,7 +112,8 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
                 infoUs.putString("nombre",usuario.getNames());
                 infoUs.putString("usuario",usuario.getUsername());
                 infoUs.putString("rol",usuario.getRol());
-                infoUs.putString("creado",usuario.getCreated_at());
+                infoUs.putString("pass",usuario.getPassword());
+                System.out.println(usuario.getPassword());
                 infoUs.putString("actualizado",usuario.getUpdated_at());
                 intent.putExtras(infoUs);
                 this.context.startActivity(intent);

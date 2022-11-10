@@ -114,15 +114,14 @@
                 android:layout_width="21dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Creado:"
+                android:text="Contraseña:"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/creadoPut"
+                android:id="@+id/passPut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:enabled="false"
                 android:textAlignment="center" />
         </LinearLayout>
 

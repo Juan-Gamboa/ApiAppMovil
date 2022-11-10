@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import com.example.myapplication.adapters.UsuariosAdapter;
+import com.example.myapplication.interfaces.ItemDelete;
 import com.example.myapplication.models.Usuario;
 import com.example.myapplication.services.InfoServices;
 import com.example.myapplication.services.dataResponse.InfoResponse;
@@ -18,10 +21,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListadoActivity extends AppCompatActivity {
+public class ListadoActivity extends AppCompatActivity  implements ItemDelete {
 
     public RecyclerView usuariosRecycleView;
     public List<Usuario> usuarios;
+    private ImageButton postBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,14 @@ public class ListadoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listado);
 
         this.usuariosRecycleView = findViewById(R.id.usuariosRecycleView);
+        this.postBtn = findViewById(R.id.postBtn);
+
+        this.postBtn.setOnClickListener(view -> {
+
+            Intent intent = new Intent(this, PostActivity.class);
+            startActivity(intent);
+
+        });
 
         //this.cargarLista();
 
@@ -102,7 +114,13 @@ public class ListadoActivity extends AppCompatActivity {
     public void initData(){
         this.usuariosRecycleView.setHasFixedSize(true);
         this.usuariosRecycleView.setLayoutManager(new LinearLayoutManager(this));
-        UsuariosAdapter adapter = new UsuariosAdapter(this.usuarios, this);
+        UsuariosAdapter adapter = new UsuariosAdapter(this.usuarios, this,this);
         this.usuariosRecycleView.setAdapter(adapter);
+    }
+
+    @Override
+    public void deleteItem(int index) {
+        this.usuarios.remove(index);
+        this.initData();
     }
 }
