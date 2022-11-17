@@ -146,18 +146,18 @@
                 android:enabled="false"
                 android:textAlignment="center" />
         </LinearLayout>
-
+        <Button
+            android:id="@+id/actualizarPut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actualizar" />
         <Button
             android:id="@+id/regresarPut"
             android:layout_width="237dp"
             android:layout_height="wrap_content"
             android:text="Volver" />
 
-        <Button
-            android:id="@+id/actualizarPut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Actualizar" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,7 +33,7 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-
+        context = this;
         this.agregarPost = findViewById(R.id.agregarPost);
         this.volverPost = findViewById(R.id.volverPost);
         this.postName = findViewById(R.id.postName);
@@ -65,9 +65,10 @@ public class PostActivity extends AppCompatActivity {
                     if (response.isSuccessful())
                     {
                         Toast.makeText(PostActivity.this,"Registrado",Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(context, ListadoActivity.class);
+
+                       Intent intent = new Intent(context, ListadoActivity.class);
                         startActivity(intent);
-                        finish();
+                       finish();
                     }
                     else{
                         String codigo=String.valueOf(response.code());
